@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Permission Table</title>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+  <table id="permissionTable" class="display">
+    <thead>
+      <tr>
+        <th>Tài nguyên</th>
+        <th>Hành động</th>
+        <th>Chọn</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Hàng ban đầu -->
+
+    </tbody>
+  </table>
+  <button id="addRow">Thêm quyền mới</button>
+  <button id="submitPermissions">Lưu quyền</button>
+
+  <script>
+    $(document).ready(function () {
+      // Khởi tạo DataTable
+      var table = $('#permissionTable').DataTable();
+
+      // Thêm hàng mới
+      $('#addRow').on('click', function () {
+        var resource = 'Phân Quyền'; // Giá trị mẫu
+        var action = 'Xóa'; // Giá trị mẫu
+        var edit = 'Sửa'; // Giá trị mẫu
+        var checkbox = '<input type="checkbox" name="permissions" value="9">';
+
+        table.row.add([resource, action, edit, checkbox]).draw();
+      });
+
+      // Lấy quyền đã chọn
+      $('#submitPermissions').on('click', function () {
+        var selectedPermissions = [];
+        $('#permissionTable input[type="checkbox"]:checked').each(function () {
+          selectedPermissions.push($(this).val());
+        });
+        console.log('Các quyền đã chọn:', selectedPermissions);
+      });
+    });
+  </script>
+</body>
+</html>
